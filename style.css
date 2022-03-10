@@ -1,0 +1,160 @@
+h1, h2, h3, h4, h5, h6, p{
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(20, 20, 20);
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.title {
+    text-align: center;
+    font-size: 4em;
+}
+
+.container {
+    display: flex;
+}
+
+.header{
+    background-color: rgb(39, 39, 39);
+    display: flex;
+    font-size: 2em;
+}
+
+.header button {
+    margin-left: auto;
+    background: none;
+    color: white;
+    font-size: 1.25em;
+    font-weight: bold;
+    border: none;
+    padding: 0 15px;
+    cursor: pointer;
+}
+
+.header button:hover{
+    background-color: rgba(255, 255, 255, 0.459)
+
+}
+
+#lists li{
+    list-style: none;
+    font-size: 1.25em;
+    display: flex;
+}
+
+#lists button {
+    margin-left: auto;
+    border: none;
+    background: none;
+    color: white;
+    cursor: pointer;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-right: 1em;
+    padding-left: 1em;
+}
+#lists button:hover{
+    background-color: rgba(255, 255, 255, 0.459)
+
+}
+
+#lists li:hover{
+    background-color: rgba(65, 64, 64, 0.459)
+}
+.lists{
+    border: 1px solid white;
+    width: 300px;
+    min-height: 90vh;
+}
+
+.items{
+    flex: 1;
+}
+
+
+#listToAdd,#addList{
+    display: none;
+}
+
+#itemToAdd,#addItem{
+    display: none;
+}
+
+.selected {
+    background-color: white;
+    color: rgb(20, 20, 20);
+}
+
+#items li {
+    display: flex;
+    background-color: rgb(73, 73, 73);
+    margin:  0.75em;
+    padding: 2em
+
+}
+
+#items li div {
+    margin-left: 1em;
+}
+
+#items li:hover {
+    background-color: rgba(255, 255, 255, 0.459)
+
+}
+
+#items .done{
+    text-decoration: line-through;
+    background-color: rgb(156, 153, 153);;
+}
+
+#newItemContainer {
+    display: none;
+}
+
+.delete-button {
+    margin-left: auto;
+    display: block;
+    border: none;
+    background: none;
+    color: white;
+    cursor: pointer;
+}
+
+.delete-button:hover{
+    background-color: rgba(255, 255, 255, 0.459)
+}
+
+.item-name-field{
+    border: none;
+    border-bottom: 2px solid black;
+    overflow: hidden;
+    outline: none;
+
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+
+    resize: none;
+    background: none;
+    color: white;
+    font-size: 16px;
+    margin-left: 16px;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+#items li:hover .hidden {
+    visibility: visible;
+}
+
+#lists li:hover .hidden{
+    visibility: visible;
+}
