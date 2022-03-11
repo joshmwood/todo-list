@@ -2,10 +2,6 @@
 DOM Variables / Event Listeners
 ============================================*/
 
-
-const newItemContainer = document.getElementById("newItemContainer")
-const newItemForm = document.querySelector("[data-new-item]");
-const newItemInput = document.querySelector("[data-new-item-input]");
 const addItemButton = document.querySelector("[data-add-item-button]")
 const addListButton = document.querySelector("[data-add-list-button]")
 
@@ -14,10 +10,10 @@ const addListButton = document.querySelector("[data-add-list-button]")
 ==============================*/
 
 let lists = [];
-let selectedList; // make this a number?
-
+let selectedList;
 
 const localStorage = window.localStorage;
+// get the user's lists
 if (!localStorage.getItem("todo.lists")) {
 
     console.log("local storage doesn't have a lists variable saved, make one")
@@ -25,7 +21,7 @@ if (!localStorage.getItem("todo.lists")) {
 } else {
     lists = JSON.parse(localStorage.getItem("todo.lists"));
 }
-
+// get the user's selected list
 if (!localStorage.getItem("todo.selected")) {
     localStorage.setItem("todo.selected", JSON.stringify(selectedList));
 }
@@ -44,8 +40,6 @@ function saveToLocalStorage() {
  Item CRUD
 ==============================*/
 
-
-// Create a ToDo Item
 function createItem(list, text) {
     list.push(
         {
@@ -63,25 +57,21 @@ function editItem(id, list, text) {
     saveToLocalStorage();
 }
 
-//get index
 function getIndex(id, array) {
     return array.findIndex((ele) => ele.id == id);
 }
 
-// Get all ToDo Items
 function getItems(list = lists[selectedList].items) {
     list.forEach(ele => {
         console.log(ele.text);
     });
 }
 
-// Delete a ToDo Item
 function deleteItem(list, index) {
     list.splice(index, 1);
     saveToLocalStorage();
 }
 
-// renders an item
 function renderItem(item) {
     let li = document.createElement("li");
 
@@ -99,7 +89,6 @@ function renderItem(item) {
     }
 
     li.appendChild(checkbox);
-
 
     let div = document.createElement("div");
     div.textContent = item.text;
@@ -119,18 +108,13 @@ function renderItem(item) {
     deleteButton.dataset.itemId = item.id;
     deleteButton.classList.add("delete-button");
     deleteButton.classList.add("hidden");
-
     li.appendChild(deleteButton);
-
-
 
     let itemsDiv = document.getElementById("items");
     itemsDiv.appendChild(li);
 }
 
-// render all items
 function renderAllItems(list = lists[selectedList].items) {
-    // clear the container
     let container = document.getElementById("items");
     clearContainer(container)
     list.forEach(item => renderItem(item));
@@ -184,12 +168,10 @@ function deleteItemClicker(e) {
     renderAllItems();
 }
 
-
 function renderNewItem() {
     createItem(lists[selectedList].items, "Untitled");
     renderAllItems();
 }
-
 addItemButton.addEventListener('click', renderNewItem);
 
 // make divs editable on double click
@@ -251,10 +233,6 @@ function makeListDivEditable(e) {
 
 }
 
-
-
-
-
 /* =====================================
 LISTS
 ========================================*/
@@ -287,9 +265,11 @@ function renderAllListNames() {
     // clear the container
     let container = document.getElementById("lists");
     clearContainer(container)
-    lists.forEach(list => renderListName(list));
 
+    lists.forEach(list => renderListName(list));
 }
+
+
 
 // renders the name of the list
 function renderListName(list) {
@@ -335,7 +315,6 @@ function renderItemClicker(e) {
     let list = lists[index]
     console.log(list.items);
     selectedList = index;
-    e.target.classList.add("selected");
     renderAllItems(list.items);
     saveToLocalStorage();
 }
@@ -356,4 +335,3 @@ renderAllListNames();
 if (lists[selectedList].items) {
     renderAllItems();
 }
-

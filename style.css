@@ -69,6 +69,7 @@ body {
     width: 300px;
     min-height: 90vh;
     background-color: rgba(46, 45, 45, 0.459);
+    margin-right: 10px;
 }
 
 #lists li{
@@ -123,7 +124,7 @@ body {
 #items li {
     display: flex;
     background-color: rgb(46, 45, 45);
-    margin:  0.75em;
+    margin-top:  0.75em;
     padding: 2em
 
 }
