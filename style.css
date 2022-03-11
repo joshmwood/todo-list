@@ -1,29 +1,30 @@
-
-h1, h2, h3, h4, h5, h6, p{
-    padding: 0;
-    margin: 0;
-}
-
 :root{
+    --font-color: rgb(230, 230, 230);
     --body-bg-color: rgb(20, 20, 20);
     --secondary-color: rgb(47, 179, 139);
+    --hover-color: rgba(255, 255, 255, 0.459);
 }
 
 body {
-    margin: 0;
-    padding: 0;
     background-color: var(--body-bg-color);
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
+    color: var(--font-color);
+    font-family: 'Open Sans', sans-serif;
     box-sizing: border-box;
 }
 
 .title {
-    text-align: center;
     font-size: 4em;
+    font-weight: bold;
+}
+
+.title-container{
     background-color: rgb(46, 45, 45);
     margin: 20px;
     padding: 25px;
+    text-align: center;
+}
+.title-container p {
+    margin-top: 1em;
 }
 
 .container {
@@ -31,6 +32,9 @@ body {
     margin: 20px;
 }
 
+/*
+    Headers
+*/
 .header{
     background-color: var(--secondary-color);
     display: flex;
@@ -45,7 +49,7 @@ body {
 .header button {
     margin-left: auto;
     background: none;
-    color: white;
+    color: var(--font-color);
     font-size: 1.25em;
     font-weight: bold;
     border: none;
@@ -54,7 +58,7 @@ body {
 }
 
 .header button:hover{
-    background-color: rgba(255, 255, 255, 0.459)
+    background-color: var(--hover-color);
 
 }
 
@@ -76,11 +80,15 @@ body {
     padding-bottom: 0.25em;
 }
 
+#lists li div {
+    height: 35px;
+}
+
 #lists button {
     margin-left: auto;
     border: none;
     background: none;
-    color: white;
+    color: var(--font-color);
     cursor: pointer;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
@@ -88,7 +96,7 @@ body {
     padding-left: 1em;
 }
 #lists button:hover{
-    background-color: rgba(255, 255, 255, 0.459);
+    background-color: var(--hover-color);
 
 }
 
@@ -104,7 +112,7 @@ body {
 
 
 .selected {
-    background-color: white;
+    background-color: var(--font-color);
     color: rgb(20, 20, 20);
 }
 
@@ -147,12 +155,12 @@ body {
     display: block;
     border: none;
     background: none;
-    color: white;
+    color: var(--font-color);
     cursor: pointer;
 }
 
 .delete-button:hover{
-    background-color: rgba(255, 255, 255, 0.459)
+    background-color: var(--hover-color);
 }
 
 .item-name-field{
@@ -167,24 +175,23 @@ body {
 
     resize: none;
     background: none;
-    color: white;
+    color: var(--font-color);
     font-size: 16px;
     margin-left: 16px;
 }
 
 .list-name-field{
     border: none;
-    border-bottom: 2px solid black;
     overflow: hidden;
     outline: none;
-
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
-
+    height: 32px;
+    border-bottom: 2px solid black;
     resize: none;
     background: none;
-    color: white;
+    color: var(--font-color);;
     font-size: 1em;
 }
 
