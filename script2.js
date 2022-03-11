@@ -166,6 +166,7 @@ function markItemDoneClicker(e) {
         markItemIncomplete(id, list);
         renderAllItems();
     }
+    saveToLocalStorage();
 }
 
 function deleteItemClicker(e) {
