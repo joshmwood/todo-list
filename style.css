@@ -1,29 +1,45 @@
+
 h1, h2, h3, h4, h5, h6, p{
     padding: 0;
     margin: 0;
 }
 
+:root{
+    --body-bg-color: rgb(20, 20, 20);
+    --secondary-color: rgb(47, 179, 139);
+}
+
 body {
     margin: 0;
     padding: 0;
-    background-color: rgb(20, 20, 20);
+    background-color: var(--body-bg-color);
     color: white;
     font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
 }
 
 .title {
     text-align: center;
     font-size: 4em;
+    background-color: rgb(46, 45, 45);
+    margin: 20px;
+    padding: 25px;
 }
 
 .container {
     display: flex;
+    margin: 20px;
 }
 
 .header{
-    background-color: rgb(39, 39, 39);
+    background-color: var(--secondary-color);
     display: flex;
     font-size: 2em;
+    align-items: center;
+}
+
+.header h2 {
+    margin-left: 15px;
 }
 
 .header button {
@@ -42,10 +58,22 @@ body {
 
 }
 
+/*
+    LISTS (sidebar)
+*/
+.lists{
+    width: 300px;
+    min-height: 90vh;
+    background-color: rgba(46, 45, 45, 0.459);
+}
+
 #lists li{
     list-style: none;
-    font-size: 1.25em;
+    font-size: 1.5em;
     display: flex;
+    padding-left: 0.5em;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
 }
 
 #lists button {
@@ -60,57 +88,54 @@ body {
     padding-left: 1em;
 }
 #lists button:hover{
-    background-color: rgba(255, 255, 255, 0.459)
+    background-color: rgba(255, 255, 255, 0.459);
 
 }
 
 #lists li:hover{
-    background-color: rgba(65, 64, 64, 0.459)
+    background-color: rgba(65, 64, 64, 0.459);
+    cursor: pointer;
 }
-.lists{
-    border: 1px solid white;
-    width: 300px;
-    min-height: 90vh;
-}
+
 
 .items{
     flex: 1;
 }
 
 
-#listToAdd,#addList{
-    display: none;
-}
-
-#itemToAdd,#addItem{
-    display: none;
-}
-
 .selected {
     background-color: white;
     color: rgb(20, 20, 20);
 }
 
+/*
+    Items
+*/
+
 #items li {
     display: flex;
-    background-color: rgb(73, 73, 73);
+    background-color: rgb(46, 45, 45);
     margin:  0.75em;
     padding: 2em
 
+}
+
+#items li:hover {
+    background-color: rgba(124, 124, 124, 0.459)
 }
 
 #items li div {
     margin-left: 1em;
 }
 
-#items li:hover {
-    background-color: rgba(255, 255, 255, 0.459)
-
-}
-
 #items .done{
     text-decoration: line-through;
-    background-color: rgb(156, 153, 153);;
+    background-color: rgb(136, 135, 135);
+}
+
+#items .done:hover{
+    background-color: rgb(136, 135, 135);
+
 }
 
 #newItemContainer {
