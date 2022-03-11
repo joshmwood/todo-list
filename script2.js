@@ -16,10 +16,6 @@ const addListButton = document.querySelector("[data-add-list-button]")
 let lists = [];
 let selectedList = lists[0] // make this a number?
 
-
-
-
-
 const localStorage = window.localStorage;
 if (!localStorage.getItem("todo.lists")) {
 
@@ -35,7 +31,9 @@ function saveToLocalStorage() {
 }
 
 
-
+/* ===========================
+ Item CRUD
+==============================*/
 
 
 // Create a ToDo Item
@@ -74,7 +72,7 @@ function deleteItem(list, index) {
     saveToLocalStorage();
 }
 
-// remnders an item
+// renders an item
 function renderItem(item) {
     let li = document.createElement("li");
 
@@ -218,7 +216,7 @@ function makeDivEditable(e) {
 function makeListDivEditable(e) {
     let div = e.target;
     let input = document.createElement("input");
-    input.classList.add("item-name-field")
+    input.classList.add("list-name-field")
 
     // get the text of the item
     let id = div.dataset.listId
