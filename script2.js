@@ -14,7 +14,8 @@ const addListButton = document.querySelector("[data-add-list-button]")
 ==============================*/
 
 let lists = [];
-let selectedList = lists[0] // make this a number?
+let selectedList; // make this a number?
+
 
 const localStorage = window.localStorage;
 if (!localStorage.getItem("todo.lists")) {
@@ -25,11 +26,19 @@ if (!localStorage.getItem("todo.lists")) {
     lists = JSON.parse(localStorage.getItem("todo.lists"));
 }
 
+if (!localStorage.getItem("todo.selected")) {
+    localStorage.setItem("todo.selected", JSON.stringify(selectedList));
+}
+else {
+    selectedList = JSON.parse(localStorage.getItem("todo.selected"));
+}
+
 function saveToLocalStorage() {
     console.log("called savetolocalstorage");
     localStorage.setItem("todo.lists", JSON.stringify(lists));
+    // save the selected list to the local storage as well
+    localStorage.setItem("todo.selected", JSON.stringify(selectedList))
 }
-
 
 /* ===========================
  Item CRUD
@@ -60,7 +69,7 @@ function getIndex(id, array) {
 }
 
 // Get all ToDo Items
-function getItems(list = selectedList.items) {
+function getItems(list = lists[selectedList].items) {
     list.forEach(ele => {
         console.log(ele.text);
     });
@@ -120,7 +129,7 @@ function renderItem(item) {
 }
 
 // render all items
-function renderAllItems(list = selectedList.items) {
+function renderAllItems(list = lists[selectedList].items) {
     // clear the container
     let container = document.getElementById("items");
     clearContainer(container)
@@ -154,7 +163,7 @@ function markItemIncomplete(id, list) {
 
 function markItemDoneClicker(e) {
     let id = e.target.dataset.itemId;
-    let list = selectedList.items;
+    let list = lists[selectedList].items;
 
     if (this.checked) {
         markItemComplete(id, list);
@@ -169,7 +178,7 @@ function markItemDoneClicker(e) {
 
 function deleteItemClicker(e) {
     let id = e.target.dataset.itemId;
-    let list = selectedList.items;
+    let list = lists[selectedList].items;
     let index = getIndex(id, list);
     deleteItem(list, index);
     renderAllItems();
@@ -177,7 +186,7 @@ function deleteItemClicker(e) {
 
 
 function renderNewItem() {
-    createItem(selectedList.items, "Untitled");
+    createItem(lists[selectedList].items, "Untitled");
     renderAllItems();
 }
 
@@ -191,8 +200,8 @@ function makeDivEditable(e) {
 
     // get the text of the item
     let id = div.dataset.itemId
-    let index = getIndex(id, selectedList.items);
-    let text = selectedList.items[index].text;
+    let index = getIndex(id, lists[selectedList].items);
+    let text = lists[selectedList].items[index].text;
 
     input.value = text;
     input.dataset.itemId = id;
@@ -206,7 +215,7 @@ function makeDivEditable(e) {
         div.addEventListener("dblclick", makeDivEditable)
 
         // edit the actual saved value of the item
-        editItem(id, selectedList.items, newText);
+        editItem(id, lists[selectedList].items, newText);
 
         e.target.replaceWith(div);
     })
@@ -325,9 +334,10 @@ function renderItemClicker(e) {
     console.log(index);
     let list = lists[index]
     console.log(list.items);
-    selectedList = list
+    selectedList = index;
+    e.target.classList.add("selected");
     renderAllItems(list.items);
-
+    saveToLocalStorage();
 }
 
 function renderNewList() {
@@ -341,4 +351,9 @@ addListButton.addEventListener('click', renderNewList);
 DOM EVENTS TO DO ON PAGE LOAD
 ==================*/
 renderAllListNames();
+
+//render the selected list
+if (lists[selectedList].items) {
+    renderAllItems();
+}
 
