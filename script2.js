@@ -347,6 +347,16 @@ function deleteListClicker(e) {
     let id = e.target.dataset.listId;
 
     let index = getIndex(id, lists);
+
+    if (id == selectedListId) {
+        // if you delete the list you've selected, re-select the first list in the list list
+        if (lists[0].id) {
+            selectedListId = lists[0].id;
+            saveToLocalStorage();
+            renderAllItems(selectedListId);
+        };
+    }
+
     deleteList(index);
     renderAllListNames();
 }
