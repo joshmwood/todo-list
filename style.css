@@ -169,7 +169,7 @@ body {
     border-bottom: 2px solid black;
     overflow: hidden;
     outline: none;
-
+    width: 900px;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
