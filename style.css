@@ -113,8 +113,13 @@ body {
 
 
 .selected {
-    background-color: var(--font-color);
-    color: rgb(20, 20, 20);
+    background-color: var(--secondary-color);
+    color: var(--font-color)
+}
+
+#lists .selected:hover{
+    background-color: var(--secondary-color);
+    color: var(--font-color)
 }
 
 /*

@@ -4,7 +4,7 @@ DOM Variables / Event Listeners
 
 const addItemButton = document.querySelector("[data-add-item-button]")
 const addListButton = document.querySelector("[data-add-list-button]")
-const maxListNameLength = 18;
+const maxListNameLength = 16;
 const maxItemLength = 80;
 
 /* ===========================
@@ -12,7 +12,7 @@ const maxItemLength = 80;
 ==============================*/
 
 let lists = [];
-let selectedList;
+let selectedListId;
 
 const localStorage = window.localStorage;
 // get the user's lists
@@ -25,17 +25,18 @@ if (!localStorage.getItem("todo.lists")) {
 }
 // get the user's selected list
 if (!localStorage.getItem("todo.selected")) {
-    localStorage.setItem("todo.selected", JSON.stringify(selectedList));
+    localStorage.setItem("todo.selected", JSON.stringify(selectedListId));
 }
 else {
-    selectedList = JSON.parse(localStorage.getItem("todo.selected"));
+    selectedListId = JSON.parse(localStorage.getItem("todo.selected"));
+    console.log(`read ${selectedListId} as the selected list id from storage`)
 }
 
 function saveToLocalStorage() {
     console.log("called savetolocalstorage");
     localStorage.setItem("todo.lists", JSON.stringify(lists));
     // save the selected list to the local storage as well
-    localStorage.setItem("todo.selected", JSON.stringify(selectedList))
+    localStorage.setItem("todo.selected", JSON.stringify(selectedListId))
 }
 
 /* ===========================
@@ -63,7 +64,8 @@ function getIndex(id, array) {
     return array.findIndex((ele) => ele.id == id);
 }
 
-function getItems(list = lists[selectedList].items) {
+// look for instances of getItems
+function getItems(list) {
     list.forEach(ele => {
         console.log(ele.text);
     });
@@ -116,7 +118,15 @@ function renderItem(item) {
     itemsDiv.appendChild(li);
 }
 
-function renderAllItems(list = lists[selectedList].items) {
+// look for isntances of renderAllItems
+function renderAllItems(selectedListId) {
+    console.log("selected list id" + selectedListId);
+
+    // get in the list which matches the id
+    let index = getIndex(selectedListId, lists);
+
+    let list = lists[index].items;
+
     let container = document.getElementById("items");
     clearContainer(container)
     list.forEach(item => renderItem(item));
@@ -149,30 +159,41 @@ function markItemIncomplete(id, list) {
 
 function markItemDoneClicker(e) {
     let id = e.target.dataset.itemId;
-    let list = lists[selectedList].items;
+
+    let index = getIndex(selectedListId, lists);
+
+    let list = lists[index].items;
 
     if (this.checked) {
         markItemComplete(id, list);
-        renderAllItems();
+        renderAllItems(selectedListId);
     } else {
         // uncheck it
         markItemIncomplete(id, list);
-        renderAllItems();
+        renderAllItems(selectedListId);
     }
     saveToLocalStorage();
 }
 
 function deleteItemClicker(e) {
     let id = e.target.dataset.itemId;
-    let list = lists[selectedList].items;
-    let index = getIndex(id, list);
-    deleteItem(list, index);
-    renderAllItems();
+
+    let index = getIndex(selectedListId, lists);
+
+    let list = lists[index].items;
+    let index2 = getIndex(id, list);
+    deleteItem(list, index2);
+    renderAllItems(selectedListId);
 }
 
 function renderNewItem() {
-    createItem(lists[selectedList].items, "Untitled");
-    renderAllItems();
+
+    let index = getIndex(selectedListId, lists);
+
+
+
+    createItem(lists[index].items, "Untitled");
+    renderAllItems(selectedListId);
 }
 addItemButton.addEventListener('click', renderNewItem);
 
@@ -185,8 +206,13 @@ function makeDivEditable(e) {
 
     // get the text of the item
     let id = div.dataset.itemId
-    let index = getIndex(id, lists[selectedList].items);
-    let text = lists[selectedList].items[index].text;
+
+
+    let index = getIndex(selectedListId, lists);
+
+
+    let index2 = getIndex(id, lists[index].items);
+    let text = lists[index].items[index2].text;
 
     input.value = text;
     input.dataset.itemId = id;
@@ -202,7 +228,9 @@ function makeDivEditable(e) {
         newText = newText.substring(0, maxItemLength);
 
         // edit the actual saved value of the item
-        editItem(id, lists[selectedList].items, newText);
+
+        let index = getIndex(selectedListId, lists);
+        editItem(id, lists[index].items, newText);
 
         e.target.replaceWith(div);
     })
@@ -285,6 +313,14 @@ function renderListName(list) {
     let li = document.createElement("li");
     li.dataset.listId = list.id;
 
+    console.log(`comparing ${list.id} to ${selectedListId}`);
+    if (list.id == selectedListId) {
+        li.classList.add("selected");
+    }
+    else {
+        li.classList.remove("selected");
+    }
+
     let div = document.createElement("div");
     div.textContent = list.name;
     div.dataset.listId = list.id;
@@ -323,8 +359,13 @@ function renderItemClicker(e) {
     console.log(index);
     let list = lists[index]
     console.log(list.items);
-    selectedList = index;
-    renderAllItems(list.items);
+
+
+    selectedListId = id;
+
+    renderAllItems(selectedListId);
+    renderAllListNames(selectedListId);
+
     saveToLocalStorage();
 }
 
@@ -341,6 +382,8 @@ DOM EVENTS TO DO ON PAGE LOAD
 renderAllListNames();
 
 //render the selected list
-if (lists[selectedList].items) {
-    renderAllItems();
+let index = getIndex(selectedListId, lists);
+let num2 = lists[index].items
+if (num2) {
+    renderAllItems(selectedListId);
 }
