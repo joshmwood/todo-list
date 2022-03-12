@@ -4,6 +4,8 @@ DOM Variables / Event Listeners
 
 const addItemButton = document.querySelector("[data-add-item-button]")
 const addListButton = document.querySelector("[data-add-list-button]")
+const maxListNameLength = 18;
+const maxItemLength = 80;
 
 /* ===========================
  Local Storage
@@ -179,6 +181,7 @@ function makeDivEditable(e) {
     let div = e.target;
     let input = document.createElement("input");
     input.classList.add("item-name-field")
+    input.maxLength = 80;
 
     // get the text of the item
     let id = div.dataset.itemId
@@ -196,6 +199,8 @@ function makeDivEditable(e) {
         div.dataset.itemId = e.target.dataset.itemId;
         div.addEventListener("dblclick", makeDivEditable)
 
+        newText = newText.substring(0, maxItemLength);
+
         // edit the actual saved value of the item
         editItem(id, lists[selectedList].items, newText);
 
@@ -208,6 +213,7 @@ function makeListDivEditable(e) {
     let div = e.target;
     let input = document.createElement("input");
     input.classList.add("list-name-field")
+    input.maxLength = maxListNameLength;
 
     // get the text of the item
     let id = div.dataset.listId
@@ -226,6 +232,9 @@ function makeListDivEditable(e) {
         div.addEventListener("dblclick", makeListDivEditable)
 
         // edit the actual saved value of the item
+
+        // trim the name to a max length of characters in case the input field limit fails
+        newName = newName.substring(0, maxListNameLength);
         editList(id, newName);
 
         e.target.replaceWith(div);
