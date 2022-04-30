@@ -381,7 +381,7 @@ function renderItemClicker(e) {
     // add the style manually to avoid the case where the user can't doubleclick since clicking would normally re-render the lists
 
     // wrap this in a function that targets specfically the <li>, not the children
-    if (e.target.tagName == "DIV") {
+    if (e.target.tagName == "DIV" || e.target.tagName == "INPUT") {
         console.log("dsfsdfsdfsdfaaaaa");
         let li = e.target.parentElement;
         li.classList.add("selected");
