@@ -2,6 +2,7 @@
     --font-color: rgb(230, 230, 230);
     --body-bg-color: rgb(20, 20, 20);
     --secondary-color: rgb(47, 179, 139);
+    --selected-color: rgb(32, 146, 112);
     --hover-color: rgba(255, 255, 255, 0.459);
 }
 
@@ -15,7 +16,12 @@ body {
 .title {
     font-size: 4em;
     font-weight: bold;
-    color: var(--secondary-color);
+    color: var(--font-color);
+    margin-bottom: 20px;
+}
+
+.title-text {
+    border-bottom: var(--secondary-color) 8px solid;
 }
 
 .title-container {
@@ -116,12 +122,12 @@ body {
 
 
 .selected {
-    background-color: var(--secondary-color);
+    background-color: var(--selected-color);
     color: var(--font-color)
 }
 
 #lists .selected:hover {
-    background-color: var(--secondary-color);
+    background-color: var(--selected-color);
     color: var(--font-color)
 }
 
