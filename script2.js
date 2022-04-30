@@ -12,7 +12,7 @@ const maxItemLength = 80;
 ==============================*/
 
 let lists = [];
-let selectedListId;
+let selectedListId = 0;
 
 const localStorage = window.localStorage;
 // get the user's lists
@@ -410,7 +410,6 @@ renderAllListNames();
 
 //render the selected list
 let index = getIndex(selectedListId, lists);
-let num2 = lists[index].items
-if (num2) {
+if (index != -1) {
     renderAllItems(selectedListId);
 }
