@@ -24,7 +24,7 @@ if (!localStorage.getItem("todo.lists")) {
     lists = JSON.parse(localStorage.getItem("todo.lists"));
 }
 // get the user's selected list
-if (!localStorage.getItem("todo.selected")) {
+if (!localStorage.getItem("todo.selected") || typeof localStorage.getItem("todo.selected") == undefined) {
     localStorage.setItem("todo.selected", JSON.stringify(selectedListId));
 }
 else {
@@ -375,7 +375,9 @@ function renderItemClicker(e) {
     //unselect previous list
     // get the selcted list by looking for the list which matches the selected id
     let div = document.querySelector(`[data-list-id="${selectedListId}"]`);
-    div.classList.remove("selected");
+    if (div) {
+        div.classList.remove("selected");
+    }
 
     selectedListId = id;
     // add the style manually to avoid the case where the user can't doubleclick since clicking would normally re-render the lists
