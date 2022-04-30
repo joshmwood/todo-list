@@ -1,4 +1,4 @@
-:root{
+:root {
     --font-color: rgb(230, 230, 230);
     --body-bg-color: rgb(20, 20, 20);
     --secondary-color: rgb(47, 179, 139);
@@ -18,12 +18,13 @@ body {
     color: var(--secondary-color);
 }
 
-.title-container{
+.title-container {
     background-color: rgb(46, 45, 45);
     margin: 20px;
     padding: 25px;
     text-align: center;
 }
+
 .title-container p {
     margin-top: 1em;
 }
@@ -36,7 +37,7 @@ body {
 /*
     Headers
 */
-.header{
+.header {
     background-color: var(--secondary-color);
     display: flex;
     font-size: 2em;
@@ -58,7 +59,7 @@ body {
     cursor: pointer;
 }
 
-.header button:hover{
+.header button:hover {
     background-color: var(--hover-color);
 
 }
@@ -66,14 +67,14 @@ body {
 /*
     LISTS (sidebar)
 */
-.lists{
+.lists {
     width: 300px;
     min-height: 90vh;
     background-color: rgba(46, 45, 45, 0.459);
     margin-right: 10px;
 }
 
-#lists li{
+#lists li {
     list-style: none;
     font-size: 1.5em;
     display: flex;
@@ -97,18 +98,19 @@ body {
     padding-right: 1em;
     padding-left: 1em;
 }
-#lists button:hover{
+
+#lists button:hover {
     background-color: var(--hover-color);
 
 }
 
-#lists li:hover{
+#lists li:hover {
     background-color: rgba(65, 64, 64, 0.459);
     cursor: pointer;
 }
 
 
-.items{
+.items {
     flex: 1;
 }
 
@@ -118,7 +120,7 @@ body {
     color: var(--font-color)
 }
 
-#lists .selected:hover{
+#lists .selected:hover {
     background-color: var(--secondary-color);
     color: var(--font-color)
 }
@@ -130,9 +132,8 @@ body {
 #items li {
     display: flex;
     background-color: rgb(46, 45, 45);
-    margin-top:  0.75em;
+    margin-top: 0.75em;
     padding: 2em
-
 }
 
 #items li:hover {
@@ -143,12 +144,12 @@ body {
     margin-left: 1em;
 }
 
-#items .done{
+#items .done {
     text-decoration: line-through;
     background-color: rgb(136, 135, 135);
 }
 
-#items .done:hover{
+#items .done:hover {
     background-color: rgb(136, 135, 135);
 
 }
@@ -166,11 +167,11 @@ body {
     cursor: pointer;
 }
 
-.delete-button:hover{
+.delete-button:hover {
     background-color: var(--hover-color);
 }
 
-.item-name-field{
+.item-name-field {
     border: none;
     border-bottom: 2px solid black;
     overflow: hidden;
@@ -187,7 +188,7 @@ body {
     margin-left: 16px;
 }
 
-.list-name-field{
+.list-name-field {
     border: none;
     overflow: hidden;
     outline: none;
@@ -198,7 +199,8 @@ body {
     border-bottom: 2px solid black;
     resize: none;
     background: none;
-    color: var(--font-color);;
+    color: var(--font-color);
+    ;
     font-size: 1em;
 }
 
@@ -211,6 +213,6 @@ body {
     visibility: visible;
 }
 
-#lists li:hover .hidden{
+#lists li:hover .hidden {
     visibility: visible;
 }

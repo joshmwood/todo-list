@@ -362,6 +362,8 @@ function deleteListClicker(e) {
 }
 
 function renderItemClicker(e) {
+    console.log("renderItemClicker")
+    console.log("e.target is ", e.target);
     let id = e.target.dataset.listId;
 
     console.log(id);
@@ -370,11 +372,16 @@ function renderItemClicker(e) {
     let list = lists[index]
     console.log(list.items);
 
+    //unselect previous list
+    // get the selcted list by looking for the list which matches the selected id
+    let div = document.querySelector(`[data-list-id="${selectedListId}"]`);
+    div.classList.remove("selected");
 
     selectedListId = id;
+    // add the style manually to avoid the case where the user can't doubleclick since clicking would normally re-render the lists
+    e.target.classList.add("selected");
 
     renderAllItems(selectedListId);
-    renderAllListNames(selectedListId);
 
     saveToLocalStorage();
 }
@@ -385,6 +392,7 @@ function renderNewList() {
 }
 
 addListButton.addEventListener('click', renderNewList);
+
 
 /*================
 DOM EVENTS TO DO ON PAGE LOAD
